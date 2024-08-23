@@ -1,6 +1,8 @@
 <?php
 
-function enter_action(): void
+use JetBrains\PhpStorm\NoReturn;
+
+#[NoReturn] function enter_action(): void
 {
     // Авторизованный пользователь не может "войти". Пусть сначала выходит.
     if (isset($_SESSION['user_id'])) {
@@ -26,7 +28,7 @@ function enter_action(): void
     }
 }
 
-function exit_action(): void
+#[NoReturn] function exit_action(): void
 {
     unset($_SESSION['user_id']);
 }
