@@ -13,9 +13,11 @@ services:
   php:
     build: ./docker
     environment:
+      MYSQL_HOST: 'db'
       MYSQL_DATABASE: ${MARIA_DATABASE}
       MYSQL_USER: ${MARIA_USER}
       MYSQL_PASSWORD: ${MARIA_PASSWORD}
+      SUDO_PASSWORD: ${SUDO_PASSWORD}
     volumes:
       - ./app:/app
 
