@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+require 'lib.php';
+
+setup_session();
 
 $path = explode('?', $_SERVER['REQUEST_URI'])[0];
 $path = trim($path, '/');
@@ -13,7 +15,6 @@ if (array_key_exists($path, $routes)) {
         exit;
     }
 
-    require 'lib.php';
     require "controllers/$routes[$path].php";
 
     call_user_func($path . '_action');

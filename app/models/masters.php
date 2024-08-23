@@ -10,3 +10,14 @@ function get_user_by_name(string $name): array
 
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
+
+function get_organization_id_by_master_id(int $master_id): int
+{
+    $pdo = pdo();
+    $query = 'select organization_id from masters where id = :master_id';
+    $statement = $pdo->prepare($query);
+
+    $statement->execute(['master_id' => $master_id]);
+
+    return $statement->fetch(PDO::FETCH_ASSOC)['organization_id'];
+}
