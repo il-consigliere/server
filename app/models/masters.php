@@ -21,3 +21,12 @@ function get_organization_id_by_master_id(int $master_id): int
 
     return $statement->fetch(PDO::FETCH_ASSOC)['organization_id'];
 }
+
+function update_password(string $master_id, string $password): void
+{
+    $pdo = pdo();
+    $query = 'update masters set password = :password where id = :master_id';
+    $statement = $pdo->prepare($query);
+
+    $statement->execute(['password' => $password, 'master_id' => $master_id]);
+}
