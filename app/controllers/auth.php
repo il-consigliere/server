@@ -32,3 +32,17 @@ use JetBrains\PhpStorm\NoReturn;
 {
     unset($_SESSION['user_id']);
 }
+
+#[NoReturn] function change_password_action(): void
+{
+    $master_id = $_SESSION['user_id'];
+    $password = filter_input(INPUT_POST, 'password');
+
+    if (!$password) {
+        http_response_code(400);
+        exit;
+    }
+
+    load_model('masters');
+    update_password($master_id, hash('sha256', $password));
+}
