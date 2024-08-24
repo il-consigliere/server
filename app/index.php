@@ -5,19 +5,22 @@ require 'lib.php';
 setup_session();
 
 $path = explode('?', $_SERVER['REQUEST_URI'])[0];
-$path = trim($path, '/');
+$method = trim($path, '/');
 $routes = require 'routes.php';
 
-if (array_key_exists($path, $routes)) {
-    // Единственный путь, куда можно попасть без авторизации — это enter.
-    if ($path !== 'enter' && !isset($_SESSION['user_id'])) {
+if (array_key_exists($method, $routes)) {
+    // Единственный метод,
+    // к которому можно обратиться без авторизации — это enter.
+    if ($method !== 'enter' && !isset($_SESSION['user_id'])) {
         http_response_code(401);
         exit;
     }
 
-    require "controllers/$routes[$path].php";
+    require "controllers/$routes[$method].php";
 
-    call_user_func($path . '_action');
+    // Заменяем дефисы подчёркиваниями в имени метода,
+    // чтобы получить настоящее имя функции.
+    call_user_func(str_replace('-', '_', $method) . '_action');
 } else {
     http_response_code(404);
 }

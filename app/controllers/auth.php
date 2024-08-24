@@ -4,14 +4,14 @@ use JetBrains\PhpStorm\NoReturn;
 
 #[NoReturn] function enter_action(): void
 {
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = filter_input(INPUT_POST, 'password');
+
     // Авторизованный пользователь не может "войти". Пусть сначала выходит.
-    if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['user_id']) || !$name || !$password) {
         http_response_code(400);
         exit;
     }
-
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
-    $password = filter_input(INPUT_POST, 'password');
 
     load_model('masters');
 

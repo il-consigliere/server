@@ -7,4 +7,7 @@ return [
 
     // initial-data
     'data' => 'initial-data',
+
+    // players
+    'add-player' => 'players',
 ];
