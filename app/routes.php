@@ -11,4 +11,7 @@ return [
 
     // players
     'add-player' => 'players',
+
+    // games
+    'save-game' => 'games',
 ];
