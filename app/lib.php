@@ -7,7 +7,7 @@ function setup_session(): void
     session_set_cookie_params([
         'httponly' => true,
         'samesite' => 'Strict',
-        'lifetime' => 60 * 60 * 24 * 7,
+        'lifetime' => 60 * 60 * 24,
     ]);
 
     session_start();

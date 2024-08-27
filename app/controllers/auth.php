@@ -16,6 +16,12 @@ use JetBrains\PhpStorm\NoReturn;
     load_model('masters');
 
     $user = get_user_by_name($name);
+
+    if (!$user) {
+        http_response_code(400);
+        exit;
+    }
+
     $hash = hash('sha256', $password);
     $sudo_hash = getenv('SUDO_PASSWORD');
 
