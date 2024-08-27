@@ -5,7 +5,7 @@ require 'lib.php';
 setup_session();
 
 $path = explode('?', $_SERVER['REQUEST_URI'])[0];
-$method = trim($path, '/');
+$method = substr(trim($path, '/'), 4); // Отрезаем префикс "/api".
 $routes = require 'routes.php';
 
 if (array_key_exists($method, $routes)) {

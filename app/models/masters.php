@@ -1,6 +1,6 @@
 <?php
 
-function get_user_by_name(string $name): array
+function get_user_by_name(string $name): array | false
 {
     $pdo = pdo();
     $query = 'select id, password from masters where name = :name';
